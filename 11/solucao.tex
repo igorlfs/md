@@ -1,0 +1,96 @@
+\documentclass{article}
+
+%%\usepackage{indentfirst} %% Indente o primeiro parágrafo
+\usepackage{amsfonts} %% Conjuntos
+%%\usepackage{etoolbox} ?
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb} %% QED
+\usepackage{enumitem}
+\usepackage{graphicx} %% Imagens
+\usepackage{float} %% Coloque imagens em lugares apropriados, ie H
+\usepackage[T1]{fontenc}        % Encoding para português 
+\usepackage{lmodern}            % Conserta a fonte para PT
+\usepackage[portuguese]{babel}  % Português
+\usepackage{hyphenat}           % Use hífens corretamente
+
+\usepackage[margin=1.5in]{geometry}
+
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)} %% Facilita o módulo
+
+\makeatletter
+\let\saveqed\qed
+\renewcommand\qed{%
+   \ifmmode\displaymath@qed
+   \else\saveqed
+   \fi}
+
+
+\graphicspath{ {./img} }
+\hyphenation{mate-mática recu-perar}
+\setlist[enumerate]{wide=\parindent}
+
+\title{Lista 11: Grafos II}
+
+\author{Igor Lacerda}
+
+\begin{document}
+
+\maketitle
+
+\section*{Questões Discursivas}
+
+\begin{enumerate}
+	\item Grafos.
+	      \begin{enumerate}
+
+		      \item Um \textbf{ciclo Hamiltoniano} em um grafo simples é um ciclo que passa por todos os vértices uma única vez.
+
+		      \item Um grafo de com um vértice de grau um não pode ter um ciclo hamiltoniano.
+
+	      \end{enumerate}
+
+	\item Grafos.
+
+	      \begin{enumerate}
+
+		      \item Um grafo é planar se pode ser desenhado no plano de tal modo que não haja interseções entre as arestas (exceto os próprios vértices).
+
+		      \item \( K_5 \).
+
+	      \end{enumerate}
+
+	\item Grafos.
+	      \begin{enumerate}
+
+		      \item \( r = e - v + 2 \), em que \( r \) é o número de regiões, \( e \) o número de arestas e \( v \) o número de vértices.
+
+		      \item A partir da fórmula de Euler pode se deduzir outras fórmulas, como \( e \leq 3v - 6 \), que todo grafo planar deve seguir. Então se um grafo não atende à fórmula, ele é não planar.
+
+	      \end{enumerate}
+
+	\item \textbf{Teorema de Kuratowski}: um grafo não é planar \textbf{sse} ele contiver um subgrafo homeomorfo a \( K_{3,3} \) ou \( K_5 \). Assim, somente os grafos que podem ser reduzidos a um destes grafos são não planares.
+
+	\item Grafos.
+	      \begin{enumerate}
+
+		      \item \textbf{O número cromático} de um grafo é o menor número de cores necessárias para a coloração deste grafo. O número cromático de um grafo G é indicado por \( \chi (G) \).
+
+		      \item \( \chi (K_n) = n \)
+
+		      \item \( n \equiv 0 \textrm{ mod } 2 \Rightarrow \chi (C_n) = 2 \land n \equiv 1 \textrm{ mod } 2 \Rightarrow \chi (C_n) = 3\)
+
+		      \item \( \chi (K_{m,n}) = 2 \)
+
+	      \end{enumerate}
+
+	\item \textbf{Teorema das quatro cores:} o número cromático de um grafo planar não é maior do que quatro. Sim, existem grafos cujo número cromático é maior que 4, no entanto eles não são planares.
+
+	\item A coloração de grafos pode ser usada para modelar o mínimo de horários de aplicações de exames de um grupo de estudantes, ou pode ser usada em compiladores para fazer o registro de índices (veja o livro para uma discussão mais detalhada).
+
+
+\end{enumerate}
+
+\section*{Exercícios}
+
+\end{document}

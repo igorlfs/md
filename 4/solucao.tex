@@ -1,0 +1,134 @@
+\documentclass{article}
+\usepackage{indentfirst} %% Indente o primeiro parágrafo
+\usepackage{amsfonts} %% Conjuntos
+%%\usepackage{etoolbox} ?
+\usepackage{amssymb}
+\usepackage{amssymb} %% QED
+\usepackage{enumitem}
+\usepackage{graphicx} %% Imagens
+\usepackage{float} %% Coloque imagens em lugares apropriados, ie H
+\graphicspath{ {./img} }
+\usepackage[T1]{fontenc}        % Encoding para português 
+\usepackage{lmodern}            % Conserta a fonte para PT
+\usepackage[portuguese]{babel}  % Português
+\usepackage{hyphenat}           % Use hífens corretamente
+\hyphenation{mate-mática recu-perar}
+\let\biconditional\leftrightarrow
+\setlist{  listparindent=\parindent }
+\AtBeginEnvironment{quote}{\par\singlespacing\small} %% Faz citações terem formatação diferente
+\title{Lista 4: Probabilidade II}
+\author{Igor Lacerda}
+\begin{document}
+\maketitle
+\section*{Questões discursivas}
+\begin{enumerate}
+
+    \item Considere \( E \) e \( F \) eventos como eventos com \( p(F) > 0 \). A \textbf{probabilidade condicional} de \( E \) dado \( F \), indicada por \( p(E \mid F) \) é dada por:
+        \[ p(E \mid F) = \frac{p(E \cap F)}{p(F)} \]
+
+        Em outras palavras, ao calcular a probabilidade do evento \( E \), assumimos que o evento \( F \) ocorre.
+
+    \item Os eventos \( E \) e \( F \) são \textbf{independentes} \( \iff \) \( p(E \cap F) = p(E) \cdot p(F) \)
+
+        Intuição: perceba que nesse caso, ao se calcular a probabilidade condicional \( p(E \mid F) \), obtém-se \( p(E) \) (\( E \) não depende de \( F \)).
+
+    \item Suponha que os \( E \) e \( F \) são eventos de um espaço amostral \( S \), tal que \( p(E) \neq 0 \land p(F) \neq 0 \). Então, pelo \textbf{Teorema de Bayes},
+
+        \[ p(F \mid E) = \frac{p(E \mid F) \cdot p(F)}{p(E)} \] 
+
+        Isso nos permite inverter \( p(E \mid F) \) com \( p(F \mid E) \).
+
+    \item Estendendo a expressão anterior, obtemos:
+
+        \[ p(F \mid E) = \frac{p(E \mid F) \cdot p(F)}{{p(E \mid F) \cdot p(F) + p(E \mid \overline{F}) \cdot p(\overline{F})}} \] 
+
+    \item \textit{Apenas dando mais ou menos um contexto para o caso laboratório médico}: há uma doença muito rara com um teste muito preciso. O que é surpreendente nessa situação é que as chances de alguém que recebeu um resultado positivo estar com a doença é \textit{muito baixa}.
+
+    \item Uma \textbf{variável aleatória} é uma função do espaço amostral de um experimento para o conjunto dos números reais, ou seja, uma variável aleatória atribui um número real para cada resultado possível.
+
+        Detalhe importante: lembre-se que a variável aleatória \textit{não é nem uma variável e nem aleatória}.
+
+        Exemplo: os resultados de um dado comum
+
+        \begin{center}
+            \begin{tabular}{ c | c c c c c c } 
+                \( x \)  & 1  & 2  & 3 & 4 & 5 & 6  \\ [0.5ex] 
+                \hline
+                \( p(X = x) \) & \( \frac{1}{6}  \) & \( \frac{1}{6}  \) & \( \frac{1}{6}  \) & \( \frac{1}{6}  \) & \( \frac{1}{6}  \) & \( \frac{1}{6}  \) \\
+            \end{tabular}
+        \end{center}
+
+        Exemplo: suponha que uma moeda seja lançada 3 vezes. Defina \( X(t) = n \), onde \( n \) é o número de caras que aparecem. Então:
+
+        \begin{itemize}
+            \item \( X(HHH) = 3 \)
+            \item \( X(HHT) = X(HTH) = X(THH) = 2 \)
+            \item \( X(TTH) = X(THT) = X(HTT) = 1 \)
+            \item \( X(TTT) = 0 \)
+        \end{itemize}
+
+        \begin{center}
+            \begin{tabular}{ c | c c c c } 
+                \( x \) & 0 & 1  & 2  & 3 \\ [0.5ex] 
+                \hline
+                \( p(X = x) \) & \( \frac{1}{8}  \) & \( \frac{3}{8}  \) & \( \frac{3}{8}  \) & \( \frac{1}{8} \) \\
+            \end{tabular}
+        \end{center}
+
+        Ou seja, a \textbf{variável aleatória} tanto pode ser uma função que associa a probabilidade de um evento ocorrer (como no exemplo da moeda), como pode associar o evento a alguma característica específica, e depois calcular a probabilidade desse característica.
+
+        A \textit{distribuição} de \( X \) em \( S \) é o conjunto de pares \( (x,p(X=x)) \forall x \in S\), onde \( p(X=x) \) é a probabilidade de \( X \) assumir o valor \( x \).
+
+
+    \item A \textbf{esperança} (ou \textit{valor esperado}) de uma variável aleatória \( X(s) \) em um espaço amostral \( S \) é igual a:\footnote{Notação do livro, não do professor.}
+
+        \[ E(X) = \sum_{s \in S} p(s)X(s)\] 
+
+        Ou seja, a \textbf{esperança} é soma dos produtos dos valores por suas probabilidades \footnote{Ou ainda, é a soma ponderada pela probabilidade.}. Usando o exemplo anterior do dado, podemos ver que a \textbf{esperança} para a variável aleatória \( p(X = x) \) é \( \frac{7}{2} \).
+
+        \textbf{ATENÇÃO:} na prática, a definição quase nunca é usada. Em vez disso, é usado o seguinte teorema:
+
+        \fbox{\begin{minipage}{29em}
+                Se \( x \) é uma variável aleatória e \( p(X = r) \) é a probabilidade de \( X = r \), para que \( p(X = r ) = \sum_{s \in S, x(S) = r} p(S) \)
+
+                \[ E(x) = \sum_{r \in X(S)} p(X = r)r\] 
+
+        \end{minipage}}
+
+        Ou seja, podemos agrupar todos os resultados determinados para o mesmo valor pela variável aleatória.
+
+    \item Se \( X_i, i = 1, 2, \mathellipsis, n \) com \( n \) um número inteiro positivo, forem variáveis aleatórias em \( S \), e se \( a \) e \( b \) forem números reais, então pelo \textbf{Teorema da Linearidade da Esperança} 
+
+        \[ E(X_1 + X_2 + \mathellipsis + X_n) = E(X_1) + E(X_2) + \mathellipsis + E(X_n) \] 
+        \[ E(aX + b) = a(Ex) + b \] 
+
+    \item Um \textbf{ensaio de Bernoulli} (ou teste de Bernoulli) é um experimento em que apenas 2 resultados possíveis (naturalmente mutualmente excludentes), chamados \textit{sucesso} e \textit{fracasso}. Normalmente, chama-se de \( p \) a probabilidade de sucesso e de \( q \) a probabilidade de fracasso, onde temos que \( p + q = 1 \).
+
+        A probabilidade de \( k \) sucessos em \( n \) \textbf{ensaios de Bernoulli} independentes, com probabilidade de sucesso \( p \) e probabilidade de fracasso \( q = 1 - p\), é
+
+        \[ C(n,k) \cdot p^{k} \cdot q^{n-k} \] 
+
+        A \textbf{esperança} do número de sucessos quando \( n \) \textbf{ensaios de Bernoulli} são realizados, em que \( p \) é a probabilidade de sucesso em cada teste é \textit{np}.
+
+    \item A \textbf{distribuição binomial} é justamente a probabilidade de se obter \( k \) sucessos em \( n \) ensaios de Bernoulli, como apresentado no item anterior.
+
+        Também podemos usar a seguinte notação do professor: 
+
+        \[ Bin_{n,p}(k) = C(n,k) \cdot p^{k} \cdot q^{n-k} \]
+
+
+        Consulte os slides para ver alguns histogramas de \textit{distribuições binomiais}. E um teorema do valor máximo e afins.
+
+    \item Uma variável aleatória \( X \) tem uma \textbf{distribuição geométrica} de parâmetro \( p \) se, para \( k = 1,2,3, \mathellipsis \),
+
+        \[ P(X = k) = q^{k-1}p \]
+
+        Se a variável aleatória \( X \) tem distribuição geométrica de parâmetro \( p \), então \( E(x) = 1/p\) (i.e., \textbf{esperança}).
+
+    \item Esse item foi feito dentro dos anteriores.
+
+\end{enumerate}
+\newpage
+\section*{Exercícios}
+
+\end{document}

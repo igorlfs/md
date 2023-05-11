@@ -1,0 +1,122 @@
+\documentclass{article}
+
+%%\usepackage{indentfirst} %% Indente o primeiro parágrafo
+\usepackage{amsfonts} %% Conjuntos
+%%\usepackage{etoolbox} ?
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb} %% QED
+\usepackage{enumitem}
+\usepackage{graphicx} %% Imagens
+\usepackage{float} %% Coloque imagens em lugares apropriados, ie H
+\usepackage[T1]{fontenc}        % Encoding para português 
+\usepackage{lmodern}            % Conserta a fonte para PT
+\usepackage[portuguese]{babel}  % Português
+\usepackage{hyphenat}           % Use hífens corretamente
+
+\usepackage[margin=1.5in]{geometry}
+
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)} %% Facilita o módulo
+
+\makeatletter
+\let\saveqed\qed
+\renewcommand\qed{%
+   \ifmmode\displaymath@qed
+   \else\saveqed
+   \fi}
+
+
+\graphicspath{ {./img} }
+\hyphenation{mate-mática recu-perar}
+\setlist[enumerate]{wide=\parindent}
+
+\title{Lista 8: Resolver Recorrências \& Funções Geradoras}
+
+\author{Igor Lacerda}
+
+\begin{document}
+
+\maketitle
+
+\section*{Questões Discursivas}
+
+\begin{enumerate}
+
+	\item Uma \textbf{relação de recorrência} é uma equação em que cada termo de uma sequência é definido em função dos elementos anteriores.
+
+	\item Em uma RdR linear, a equação para se obter o n-ésimo termo \( a_n \) é uma combinação linear dos termos anteriores. Uma RdR ser linear significa que nenhum termo aparece sem estar multiplicado por um \( a_j \). Por fim, o fato de os coeficientes serem constantes significa que eles não são uma função de \( n \). Podemos representá-las assim:
+
+	      \[ a_n = c_1 a_{n-1} + c_2 a_{n-2} + \mathellipsis + c_k a_{n-k} \]
+
+	\item Você pode testar alguns valores (dado que você tem uma candidata a solução). Fora isso, existem os algoritmos fechados para se obter soluções em alguns casos, como no na RdR descrita no item anterior.
+
+	\item A equação característica de um RdR é obtida dividindo a equação da recorrência pelo termo de ``maior grau'', por exemplo: a equação característica da recorrência \( a_n = a_{n-1} + a_{n-2} \) é \( r^2 - r - 1 = 0 \). As raízes características são as raízes dessa equação e são importantes nas fórmulas fechadas para se calcular as fórmulas fechadas.
+
+	\item Encante a equação de recorrência. Resolva-a. A candidata a solução vai ser da forma \( a_n = \alpha_1 r^n_1 + \alpha_2 r^n_2 \) (para raízes distintas e recorrência de grau 2). Podemos generalizar isso para graus maiores e raízes iguais. Neste último caso, vamos escrevendo a solução da seguinte maneira: \( a_n = \alpha_1 r^n + \alpha_2 n r^n + \alpha_3 n^2 r^n  \) para uma raiz única raiz de multiplicidade 3 em um grau 3. Substitua nas condições iniciais e a resolva o sistema de equações linear associado. Se a equação for heterogênea, considere sua parte homogênea e a resolva. Se ela for um polinômio, exponencial ou produto destes, existem candidatos a resolução geral, que é como se fosse uma solução particular para a homogênea mais um termo especial. Por exemplo nos casos em \( F(n) \) é um polinômio de grau 1, o candidato é uma função \( cn + d \) e quando \( F(n) \) é exponencial, o candidato é \( Cb^n \) (ver exemplos 10 e 11 da seção 7.2). Por fim, pode ser útil verificar se a solução encontrada de fato é válida, fazendo uns testes.
+
+	\item Como mencionado no item anterior, vamos adicionando graus em \( n \) para as raízes.
+
+	\item Uma RdR heterogênea é do formato:
+
+	      \[ a_n = c_1 a_{n-1} + c_2 a_{n-2} + \mathellipsis + c_k a_{n-k} + F(n)\]
+
+	      Em que \( F(n) \) é uma função de \( n \). A solução particular é uma solução que resolve a equação homogênea associada.
+
+	\item Um algoritmo de divisão e conquista particiona um problema grande em problemas menores até que eles sejam simples o suficiente para serem resolvidos rapidamente e depois combina as soluções individuais de forma adequada para criar uma solução final. Exemplos: \textit{mergesort}, \textit{quicksort}.
+
+	\item A função de complexidade desses algoritmos depende da complexidade de etapas menores, normalmente tendo o seguinte formato: \( T(n) = aT(n/b) + f(n) \).
+
+	\item O Teorema Mestre é uma forma conveniente de encontrar a complexidade de uma porrada de algoritmos recursivos. Seja \( T(n) = aT(n/b) + f(n) \) a função de complexidade do algoritmo, com \( a \geq 1, b > 1 \land f(n) > 0 \). Então, pelo Teorema Mestre:
+
+	      \begin{enumerate}
+
+		      \item Se \( f(n) = O(n^{\log_b {a- \epsilon}}) \mapsto T(n) = \Theta(n^{\log_b {a - \epsilon }})\), ``\( n \) é polinomialmente < \( n^{\log_b {a - \epsilon}} \)''.
+
+		      \item Se \( f(n) = \Theta(n^{\log_b a}) \mapsto T(n) = \Theta( \log n \cdot n^{\log_b {a - \epsilon }})\)
+
+		      \item Se \( f(n) = \Omega(n^{\log_b {a + \epsilon}}) \mapsto T(n) = \Theta(f(n))\), ``\( n \) é polinomialmente > \( n^{\log_b {a - \epsilon}} \)''.
+
+	      \end{enumerate}
+
+	      No último caso, a condição de regularidade também deve ser satisfeita:
+	      \[ af(n/b) \leq cf(n), c < 1, n \geq n_0 \]
+
+	\item Uma \textbf{função geradora} é uma série formal cujos coeficientes codificam informações sobre uma sucessão \( a_n \) cujo índice percorre os naturais.
+
+	\item \( \sum_{n \geq 0 }{(-1)^nx^n} \), que é \( \frac{1}{1 + x} \) e \( \sum_{n \geq 0}{x^n} \), que é \( \frac{1}{1 - x} \)
+
+	\item Funções geradoras:
+
+	      \begin{enumerate}
+
+		      \item \( \frac{1}{1 - ax} = \sum_{n \geq 0}{a_nx^n} \)
+
+		      \item \( \frac{1}{1 - x^r} = \sum_{n \geq 0}{x^{rn}} \)
+
+		      \item \( \frac{1}{(1 - x)^2} = \sum_{n \geq 0}{(n+1)x^n} \)
+
+		      \item \( \frac{1}{(1 - x)^m} = \sum_{n \geq 0}{C(m+n-1,n)x^n} \)
+
+		      \item \( (1+x)^m = \sum_{n \geq 0}{C(m,n)x^n} \)
+
+	      \end{enumerate}
+
+	\item Usando a fórmula para o coeficiente binomial estendido:
+
+	      \[ \sum_{n \geq 0 }{C(u,n)x^n} = (1+x)^u \]
+
+	      Ou, ainda:
+
+	      \[ (1+x)^{-n} = \sum_{k \geq 0}{C(-n,k)x^k = \sum_{k \geq 0}{(-1)^k C(n-k-1,k) x^k}} \]
+
+	\item Considere \( u \) como um número real e \( n \) como um número inteiro não negativo. Então, o \textbf{coeficiente binomial estendido} é definido por:
+
+	      \[ C(u,n) = u(u-1) \mathellipsis (u-n+1)/n! \]
+
+	      se \( n > 0 \) e 1 se \( n = 0 \) (ver o item anterior também)
+
+\end{enumerate}
+
+\section*{Exercícios}
+
+\end{document}

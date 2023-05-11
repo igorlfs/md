@@ -1,0 +1,117 @@
+\documentclass{article}
+
+%%\usepackage{indentfirst} %% Indente o primeiro parágrafo
+\usepackage{amsfonts} %% Conjuntos
+%%\usepackage{etoolbox} ?
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb} %% QED
+\usepackage{enumitem}
+\usepackage{graphicx} %% Imagens
+\usepackage{float} %% Coloque imagens em lugares apropriados, ie H
+\usepackage[T1]{fontenc}        % Encoding para português 
+\usepackage{lmodern}            % Conserta a fonte para PT
+\usepackage[portuguese]{babel}  % Português
+\usepackage{hyphenat}           % Use hífens corretamente
+
+\usepackage[margin=1.5in]{geometry}
+
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)} %% Facilita o módulo
+
+\makeatletter
+\let\saveqed\qed
+\renewcommand\qed{%
+   \ifmmode\displaymath@qed
+   \else\saveqed
+   \fi}
+
+
+\graphicspath{ {./img} }
+\hyphenation{mate-mática recu-perar}
+\setlist[enumerate]{wide=\parindent}
+
+\title{Lista 9: Relações}
+
+\author{Igor Lacerda}
+
+\begin{document}
+
+\maketitle
+
+\section*{Questões Discursivas}
+
+\begin{enumerate}
+
+	\item Uma relação \( \sim \) de \( A \) em \( B \) é um subconjunto do produto cartesiano \( A \times B \).
+
+	\item Toda função é uma relação (em particular uma relação unívoca e completa), pois toda função é subconjunto do produto cartesiano do domínio com o contradomínio. Mas nem toda relação é uma função, pois numa relação dois elementos podem ser mapeados para um mesmo elemento no segundo conjunto (o que viola a definição de função).
+
+	\item Uma relação \( \sim \) de \( A \) em \( A \) é um subconjunto do produto cartesiano \( A \times A \).
+
+	\item Dada uma relação \( \sim \) em \( A \), ela é dita \textit{reflexiva} se \( \forall a \in A: a \sim a\).
+
+	\item Dada uma relação \( \sim \) em \( A \), ela é dita \textit{simétrica} se \( \forall a,b \in A, a \sim b \Rightarrow b \sim a \).
+
+	\item Dada uma relação \( \sim \) em \( A \), ela é dita \textit{transitiva} se \( \forall a,b,c \in A, a \sim b \Rightarrow b \sim c\).
+
+	\item Seja \( \sim _R \) uma relação de um conjunto \( A \) para um conjunto \( B \) e seja \( \sim _S \) uma relação do conjunto \( B \) para o conjunto \( C \). A \textit{composição} de \( \sim _R\) e \( \sim _S \) é a relação composta pelos pares ordenados \( (a,c) \), onde \( a \in A \land c \in C \) para os quais existe um \( b \in B \mid a \sim _R b \land b \sim _S c \). Se usamos a notação de letras maiúsculas, a composta das relações \( R \) e \( S \) é \( S \circ R \).
+
+	\item Seja \( R \) uma relação em \( A \times B \). Então a relação inversa \( R^{-1} \) de \( R \) é:
+	      \[ R^{-1} = \{ (y,x) \in B \times A \mid (x,y) \in R\} \]
+
+	\item Seja \( R \) uma relação em \( A \). Então as potências \( R^n, n = 1, 2, 3 \mathellipsis \), são definidas recursivamente por:
+
+	      \[\begin{cases}
+			      R^1 = R \\
+			      R^{n+1} = R^n \circ R
+		      \end{cases}\]
+
+	\item Uma relação \( R \) em \( A \) \textbf{é transitiva se, e somente se} \(R^n \subseteq R \forall n \in \mathbb{N} \)
+
+	\item Representa-se \( R \subseteq A \times B \) com uma matriz \( m \times n \) em que \( m \) é a cardinalidade de \( A \) e \( n \) é a cardinalidade de \( B \), em que cada elemento \( a_{ij} \) é 1 se \( i \sim j \) e 0 caso contrário.
+
+	\item Seja \( R \) uma relação em \( A \), então sua representação como grafo orientado consiste em vértices como elementos de \( A \) e arestas de \( a \) para \( b \) se \( aRb \).
+
+	\item Seja \( R \) um relação em \( A \), seu fecho transitivo \( \overline{R^t} \) é a menor extensão de \( R \) que seja transitiva.
+
+	\item Seja \( R \) uma relação em \( A \), então sua \textbf{relação de conectividade} \( R^* \) é composta pelos pares \( (a,b) \) tais que existe um caminho de comprimento pelo menos um de \( a \) para \( b \) em \( R \).
+
+	\item Em outras palavras, \( R^* \) é a união de todos os conjuntos \( R^n \):
+	      \[ R^* = \bigcup_{n=1}^{\infty} R^n \]
+
+	\item O fecho transitivo \( \overline{R^t} \) é igual à \textbf{relação de conectividade} \( R^* \).
+
+	\item \( \overline{R^t} = R \cup R^2 \cup \mathellipsis \cup R^n \). Mais especificamente, seja \( M_R \) a matriz da relação \( R \) num conjunto com \( n \) elementos. Então a matriz do fecho transitivo \( \overline{R^t} = R^* \) é:
+	      \[ M_{R^*} = M_R \lor M_R^{[2]} \lor M_R^{[3]} \lor \mathellipsis \mathellipsis M_R^{[n]} \]
+
+	\item Pode-se provar que uma relação \( \sim \) em um conjunto \( A \) é de equivalência ao se provar que \( \sim \) é reflexiva, simétrica e transitiva.
+
+	\item Seja \( R \) uma relação de equivalência em \( A \). Então, o conjunto de todos os elementos que estão relacionados com algum elemento \( a \) é a classe de equivalência \( [a] \). Em termos matemáticos:
+	      \[ [a] = \{ s \mid a \sim s\} \]
+
+	\item Vale que \( [a] = [b] \) ou (exclusivamente) que \( [a] \cap [b] = \emptyset \). Ou seja, para duas classes de equivalência serem iguais, basta que elas tenham um elemento em comum, e se elas não tiverem nenhum elemento em comum, elas são diferentes.
+
+	\item Uma partição de um conjunto \( S \) é a família de subconjuntos não vazios de \( S \), que são disjuntos 2 a 2 e que tem \( S \) como sua união.
+
+	\item A partição gerada por uma relação \( \sim \) é aquela em que os conjuntos correspondem a classes de equivalência distintas.
+
+	\item Dada uma relação \( \sim \) em \( A \), ela é dita \textit{anti-simétrica} se \( \forall a,b \in A \mid a \sim b \land b \sim a \Rightarrow a = b \). Ou seja, se \( a \neq b \), então ou \( a \sim b \) ou \( b \sim a \) ou \( a \) e \( b \) não estão relacionados. Intuitivamente, uma relação \textit{anti-simétrica} é aquela em que os únicos elementos que são simétricos são do tipo \( a \sim a \).
+
+	\item Pode-se provar que uma relação \( \sim \) em um conjunto \( A \) é uma ordem parcial ao se provar que ela é reflexiva, anti-simétrica e transitiva.
+
+	\item Um conjunto \( A \) e uma ordem parcial \( \sim \) formam um conjunto parcialmente ordenado ou \textit{poset} e é denotado por \( (A, \sim) \).
+
+	\item Dois elementos \( a \) em \( b \) de um \textit{poset} \( (S, \preceq) \) são ditos comparáveis se ou \( a \preceq b \) ou \( b \preceq a \). Quando nenhuma dessas condições ocorre, diz-se que \( a \) e \( b \) são incomparáveis.
+
+	\item Se \( (S, \sim ) \) for um \textit{poset} e todos os elementos de \( S \) forem 2 a 2 comparáveis, \( S \) é chamado de conjunto totalmente ordenado e \( \sim \) é uma ordem total.
+
+	\item Dado um produto cartesiano de \( n \) \textit{posets} \( (A_1, \sim_1 ), (A_2, \sim_2 ), \mathellipsis , (A_n, \sim_n ) \) define-se a seguinte ordem parcial \( \preceq \) como a \textbf{ordem lexicográfica} em \( A_1 \times A_2 \times \mathellipsis \times A_n \):
+	      \[ (a_1,a_2, \mathellipsis , a_n) \prec (b_1,b_2, \mathellipsis b_n) \]
+	      Se \( a_1 \prec b_1 \) ou se existe algum \( i > 0 \) tal que \( a_1 = b_1, \mathellipsis a_i = b_i \land a_{i+1} \prec_{i+1} b_{i+1}\). Assim, nós podemos definir uma ordem lexicográfica para \textit{strings}: sejam \( a_1a_2 \mathellipsis a_m \) e \( b_1b_2 \mathellipsis b_n \) em um conjunto parcialmente ordenado \( S \), tais que uma é diferente da outra. Seja \( t \) o mínimo entre \( m \) e \( n \). Então a definição da ordem lexicográfica é que a \textit{string} \( a_1a_2 \mathellipsis a_m \) é menor que a \textit{string} \( b_1b_2 \mathellipsis b_n \) se e somente se:
+	      \[ (a_1,a_2, \mathellipsis , a_t) \prec (b_1, b_2, \mathellipsis b_t) \lor ((a_1,a_2, \mathellipsis , a_t) = (b_1, b_2, \mathellipsis b_t) \land m < n) \]
+
+	\item Um diagrama de Hasse é um tipo de diagrama matemático usado para representar um \textit{poset} finito. Pode-se construir um diagrama de Hasse da seguinte maneira: comece com o grafo direcionado da relação e remova os laços. Depois, remova as arestas presentes apenas para completar a transitividade. Depois, ordene o grafo de tal maneira que o vértice inicial fique em baixo do último vértice e remova as setas. O diagrama resultante é um diagrama de Hasse.
+
+\end{enumerate}
+
+\end{document}

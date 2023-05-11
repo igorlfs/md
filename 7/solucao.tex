@@ -1,0 +1,158 @@
+\documentclass{article}
+
+%%\usepackage{indentfirst} %% Indente o primeiro parágrafo
+\usepackage{amsfonts} %% Conjuntos
+%%\usepackage{etoolbox} ?
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb} %% QED
+\usepackage{enumitem}
+\usepackage{graphicx} %% Imagens
+\usepackage{float} %% Coloque imagens em lugares apropriados, ie H
+\usepackage[T1]{fontenc}        % Encoding para português 
+\usepackage{lmodern}            % Conserta a fonte para PT
+\usepackage[portuguese]{babel}  % Português
+\usepackage{hyphenat}           % Use hífens corretamente
+
+\usepackage[margin=1.5in]{geometry}
+
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)} %% Facilita o módulo
+
+\makeatletter
+\let\saveqed\qed
+\renewcommand\qed{%
+   \ifmmode\displaymath@qed
+   \else\saveqed
+   \fi}
+
+
+\graphicspath{ {./img} }
+\hyphenation{mate-mática recu-perar}
+\setlist[enumerate]{wide=\parindent}
+
+\title{Lista 7: Teoria dos números \& recorrências}
+
+\author{Igor Lacerda}
+
+\begin{document}
+
+\maketitle
+
+\section*{Questões Discursivas}
+
+\begin{enumerate}
+
+	\item \( d \) é divisor de \( n \) se \( n / d \) deixa resto 0. Alternativamente, podemos dizer que \( d \) divide \( n \), usando a notação \( d \mid n \). Podemos ainda dizer que \( n \) é múltiplo de \( d \), que significa que existe um \( c \mid d \cdot c = n\). Aqui, claro, só estamos trabalhando com inteiros.
+
+	\item Seja \( q \) o quociente e \( r \) o resto, então vale que:
+	      \[ a = b \cdot q + r \]
+
+	\item \textbf{div} e \textbf{mod} são operações relacionadas à divisão de \( a \) por \( b \). \textbf{div} é o quociente de \( a \) por \( b \) e \textbf{mod} é o resto da divisão de \( a \) por \( b \).
+
+	\item \( a \) e \( b \) são congruentes módulo \( m \) se, e somente se, \( a - b \) deixa resto 0 por \( m \). Alternativamente podemos dizer que \( a - b \) é múltiplo de \( m \). Ou, equivalentemente, \( a \) e \( b \) são congruentes módulo \( m \) se, e somente se, \( a \) e \( b \) deixam o mesmo resto quando divididos por \( m \).
+
+	\item Sejam \( a,b,c,d,m \in \mathbb{Z}; m > 0 \). Se \( a \equiv b \Mod{m} \land c \equiv d \Mod{m} \), então:
+	      \[ a + c \equiv b + d \Mod{m} \]
+	      \[ ac \equiv bd \Mod{m} \]
+
+	\item Um número primo é um número natural não nulo e diferente de 1 com a propriedade de ser divisível somente por 1 e por ele mesmo.
+
+	\item O Teorema Fundamental da Aritmética prova que qualquer inteiro positivo diferente de 1 pode ser escrito como um único (salvo de ordenações) produto de primos.
+
+	\item Seja \( \pi(x) \) a função que conta todos os números primos até \( x \):
+	      \[ \pi(x) = \mid \{ 1 < p \leq x : \textrm{p é primo} \} \]
+
+	      Então o Teorema do Número Primo estabelece que:
+	      \[ \lim_{x \to \infty} \pi(x) = \left\lfloor \frac{x}{\log x} \right\rfloor \]
+
+	\item O máximo divisor comum (MDC) de dois números (inteiros) \( a \) e \( b \) é um número (inteiro) \( c \) tal que \( c \mid a \land c \mid b \land \forall d > c, d \nmid a \lor \nmid b \), ou seja, é o maior número que divide simultaneamente \( a \) e \( b \).
+
+	\item Dois números são primos entre si se seu MDC é 1.
+
+	\item Converter de uma base \( b_1 \) para uma base \( b_2 \) consiste em aplicar divisões sucessivas (parecidas com o \textit{Algoritmo de Euclides}), em que fixamos o divisor como a nova base e trocamos os divisores pelos quocientes antecessores, terminando quando o quociente for nulo. O resultado final são os restos concatenados na ordem inversa em que foram obtidos. Vamos fazer um exemplo: converter \( (53)_{10} \) para base 2:
+	      \begin{align*}
+		      53 & = 2 \cdot 26 + 1 \\
+		      26 & = 2 \cdot 13 + 0 \\
+		      13 & = 2 \cdot 6 + 1  \\
+		      6  & = 2 \cdot 3 + 0  \\
+		      3  & = 2 \cdot 1 + 1  \\
+		      1  & =  2\cdot 0 + 1
+	      \end{align*}
+
+	      Ou seja, \( (53)_{10} = (110101)_{2} \). Similarmente, poderíamos fazer:
+	      \begin{align*}
+		      53 & = 16 \cdot 3 + 5 \\
+		      3  & = 16 \cdot 0 + 3
+	      \end{align*}
+
+	      Assim, \( (53)_{10} = (35)_{16} \)
+
+	\item Existe um jeito mais simples de converter para base 10: dado um número inteiro positivo \( c \) qualquer em uma base arbitrária \( b \), podemos convertê-lo para base 10 usando a definição de base\footnote{Aqui, \( k \) é não negativo, e os \( a_0, \mathellipsis a_n \) estão entre (inclusivamente) 0 e \( b \)}:
+	      \[ (c)_{b} = a_{k}b^{k} + a_{k+1}b^{k-1} + \mathellipsis a_{1}b + a_{0} \]
+
+	      Façamos uns exemplos: que número em base 10 é \( (1110001)_{2} \)?
+	      \[ 1 \cdot 2^0 + 0 \cdot 2^1 + 0 \cdot 2^2 + 0 \cdot 2^3 + 1 \cdot 2^4 + 1 \cdot 2^5 + 1 \cdot 2^6 = 1 + 16 + 32 + 64 = 113 \]
+
+	      Para a base hexadecimal é a mesma coisa, por exemplo, \( (CF)_{16} \) é:
+	      \[ 15 \cdot 16^0 + 12 \cdot 16^1 = 15 + 192 = 207 \]
+
+	\item Usamos o \textbf{Algoritmo de Euclides} para encontrar o MDC de forma mais eficiente do que métodos tradicionais. Aplicamos divisões sucessivas até encontrar um resto nulo: neste ponto o MDC é o resto anterior. Nas divisões trocamos o dividendo pelo divisor antecedente e o divisor pelo resto antecedente. Por exemplo, qual o MDC de 1344 e 328?
+	      \begin{align*}
+		      1344 & = 328 \cdot 4 + 32 \\
+		      328  & = 32 \cdot 10  + 8 \\
+		      32   & = 8 \cdot 4 + 0
+	      \end{align*}
+
+	      Ou seja, o MDC entre esses números é 8.
+
+	\item Se \( m_k \) é um inteiro positivo e \( \gcd (m_i, m_j) = 1 \forall i \neq j \), então o sistema de congruências lineares:
+	      \begin{align*}
+		       & x \equiv a_{1} \Mod{m_1}       \\
+		       & x \equiv a_{2} \Mod{m_2}       \\
+		       & \mathellipsis                  \\
+		       & x \equiv a_{n-1} \Mod{m_{n-1}} \\
+		       & x \equiv a_{n} \Mod{m_{n}}
+	      \end{align*}
+
+	      Tem uma única solução: \( x = X \Mod{m} \), em que \( m = m_1 \cdot m_2 \cdot \mathellipsis \cdot m_{n_1} \cdot m_n \). O valor de \( X \) pode ser encontrado utilizando-se o \textbf{Teorema Chinês dos Restos}:
+	      \[ X = a_1 \cdot M_1 \cdot x_1 + a_2 \cdot M_2 \cdot x_2 + \mathellipsis + a_n \cdot M_n \cdot x_n \]
+
+	      Em que \( M_a \) é o produto de todos os \( m_k \) com exceção de \( m_a \) e \( x_a \) é o número que torna \( M_a \cdot x_a \equiv 1 \Mod{m_a} \).
+
+	\item Uma \textbf{relação de recorrência} é uma equação em que cada termo de uma sequência é definido em função dos termos anteriores (ex: sequência de Fibonacci).
+
+	\item \( F(1) = 1, F(2) = 1, F(n) = F(n-1) + F(n-2) \) para \( n > 2 \), produzindo: 1,1,2,3,5,8...
+
+	\item \textbf{Torre de Hanói} é um quebra-cabeça que consiste em uma base contendo três pinos, em um dos quais são dispostos alguns discos uns sobre os outros, em ordem crescente de diâmetro, de cima para baixo. O problema consiste em passar todos os discos de um pino para outro qualquer, usando um dos pinos como auxiliar, de maneira que um disco maior nunca fique em cima de outro menor em nenhuma situação.
+
+\end{enumerate}
+
+\section*{Exercícios}
+
+
+Sejam \( a \) e \( b \) inteiros.
+
+\begin{enumerate}
+
+	\item \( \forall a, a \cdot 1 = a \Rightarrow \exists c \mid a = c \cdot 1 \)
+
+	      \begin{center}
+		      \( \therefore 1 \mid a \forall a \)
+	      \end{center}
+
+	\item \( \forall b, 0 \cdot b = 0 \Rightarrow \exists c \mid 0 = c \cdot b \)
+
+	      \begin{center}
+		      \( \therefore b \mid 0 \forall b \)
+	      \end{center}
+
+	\item \( 0 \mid a \Rightarrow \exists c \mid a = c \cdot 0 \Rightarrow a = 0 \land a = 0 \Rightarrow \exists c \mid a = c \cdot 0 \Rightarrow 0 \mid a \qed\)
+
+
+\end{enumerate}
+
+\( \models \exists n \mid P = p_1p_2 \hdots p_n + 1 \) não é primo. \textbf{[3.5.34]}
+
+Usando uma calculadora, podemos fatorar \( 2 \cdot 3 \cdot 5 \cdot 7 \cdot 11 \cdot 13 + 1 = 30031 \), cujos fatores primos são 59 e 509.
+
+\end{document}

@@ -1,0 +1,88 @@
+\documentclass{article}
+\usepackage{indentfirst} %% Indente o primeiro parágrafo
+\usepackage{amsfonts} %% Conjuntos
+%%\usepackage{etoolbox} ?
+\usepackage{amssymb}
+\usepackage{amssymb} %% QED
+\usepackage{enumitem}
+\usepackage{graphicx} %% Imagens
+\usepackage{float} %% Coloque imagens em lugares apropriados, ie H
+\graphicspath{ {./img} }
+\let\biconditional\leftrightarrow
+\setlist{  listparindent=\parindent }
+\AtBeginEnvironment{quote}{\par\singlespacing\small} %% Faz citações terem formatação diferente
+\title{Lista 3: Probabilidade I}
+\author{Igor Lacerda}
+\begin{document}
+\maketitle
+\section*{Questões discursivas}
+\begin{enumerate}
+    \subsection*{Seção 6.1} 
+    \item Segundo Laplace, podemos definir uma probabilidade finita da seguinte maneira:
+
+        Se \( S \) é um espaço amostral finito de resultados igualmente prováveis e \( E \) é um evento, ou seja, um subconjunto de \( S\), então a \textit{probabilidade} de \( E \) é \( p(E) = \frac{|E|}{|S|} \).
+
+    \item Existe a \textit{fórmula do complemento} e a \textit{fórmula da união}:
+
+        Considere \( E \) como um evento em um espaço amostral \( S \). A probabilidade do evento \( \overline{E} \), o evento complementar de \( E \) é dada por
+
+        \[  p(\overline{E}) = 1 - p(E)\]
+
+        Considere \( E_1 \) e \( E_2 \) como eventos no espaço amostral \( S \). Então,
+
+        \[ p(E_1 \cup E_2 ) = P(E_1) + P(E_2) - P(E_1 \cap E_2) \] 
+
+    \item O problema das 3 portas de Monty Hall é um problema de probabilidade que se originou em um programa de TV. Existe um prêmio atrás de uma das 3 portas, você (querendo ganhar o prêmio), deve escolher apenas uma. Após a sua escolha, o apresentador do programa revela uma das portas \textit{que não contém} o prêmio. Você então recebe a oportunidade de trocar de porta. Você deve?
+
+        \textit{Surpreendentemente,} o recomendado é que você troque de porta. Na sua escolha inicial, você tinha \( \frac{1}{3} \) de chances de acertar. Após o apresentador revelar uma das portas erradas, a sua chance de acerto \textit{não é alterada}. Por outro lado, a porta \textit{restante} fica com \( \frac{2}{3} \) de chances de ser a porta certa. 
+
+        \textit{Não acredita em mim?} Como o prof. muito bem colocou na aula, imagine que em vez de 3 portas, fossem 30. Você escolhe uma porta e o apresentador revela 28 portas que não contêm o prêmio, restando apenas a porta que você escolheu e uma restante. Nesse caso, \textit{você} concorda que deve trocar? Afinal, \textit{aquela} porta restante ``sobreviveu'' a uma escolha entre 29 portas (enquanto a sua porta original foi apenas um chute)!
+
+        \subsection*{Seção 6.2}
+
+    \item Bem, as principais limitações da definição de Laplace são: 
+        \begin{itemize}
+            \item Não pode ser usada quando se trabalha com infinitas possibilidades;
+            \item Não pode ser usada quando as probabilidades de um evento não são igualmente prováveis (dado viciado).
+        \end{itemize}
+
+    \item Um \textbf{espaço amostral} é o conjunto de todos os possíveis resultados de um \textit{experimento.} Ora, um \textbf{resultado} é o estado final que um \textit{experimento} pode assumir.
+
+    \item Uma \textbf{distribuição de probabilidades} é uma função \( p \) aplicada a todos os resultados do espaço amostral \( S \), que atribui a cada resultado \( s \) a probabilidade \( p(s) \) de o evento ocorrer.
+
+        Existem 2 axiomas que se aplicam:
+
+        \begin{itemize}
+            \item A probabilidade de qualquer resultado \( s \) é um número real não-negativo não maior que 1:
+
+                \[ 0 \leq p(s) \leq 1 \forall s \in S \] 
+
+            \item Com certeza um resultado deve ocorrer:
+
+                \[ \sum_{s \in S} p(S) = 1 \] 
+
+        \end{itemize}
+
+    \item Um \textbf{evento} é um subconjunto do \textit{espaço amostral} \( S \).
+
+    \item As mesmas fórmulas da questão 2 se aplicam. Em particular, temos que:
+
+        Se \( E_1, E_2, \mathellipsis \) for uma sequência de eventos disjuntos em um espaço amostral \( S \), então:
+
+        \[ p\left(\bigcup_i E_i\right) = \sum_i p(E_i) \] 
+
+    \item O \textbf{paradoxo do aniversário} \textit{não} é um paradoxo. É um resultado contra-intuitivo de probabilidade: nós temos a tendência a achar que é muito mais improvável (do que realmente é) que duas pessoas em um dado conjunto de pessoas façam aniversário no mesmo dia. De fato, para que exista uma chance maior que 50\% de duas pessoas numa mesma sala fazerem aniversário no mesmo dia, bastam 23 pessoas.
+
+        De modo geral, essa é abordagem: entra uma pessoa. Entra uma \textit{segunda} pessoa. Para ela não fazer aniversário no mesmo dia da pessoa anterior, ela deve ter nascido em 365 dos 366 dias do ano (considerando que todo ano é bissexto por uma questão de simplificação). Para a \textit{terceira} pessoa, os dois dias das pessoas anteriores devem ser excluídos, dando um total de 364 opções.Assim, a \( j \)-ésima pessoa deve ter o aniversário diferente das \( j - 1 \) pessoas anteriores. Portanto, a chance de existir alguma repetição entre \( j \) pessoas é:
+
+        \[ p(\overline{E}) = 1 - \frac{365 \cdot 364 \cdot \mathellipsis \cdot (366 - (j - 1))}{366^{j-1}} \] 
+
+    \sloppy \item Um \textbf{algoritmo probabilístico}, ou, em particular, os Algoritmos de Monte Carlo são um tipo de algoritmo que funciona de forma muito semelhante ao \textit{paradoxo do aniversário:} é um loop iterado \( k \) vezes. A cada iteração é feito um teste entre um elemento aleatório de um arranjo de \( n\) elementos, que pode tanto resultar \textit{verdadeiro} como \textit{desconhecido}. Se o resultado é verdadeiro, problema resolvido. Se o resultado é \textit{desconhecido}, o loop é iterado novamente. Se todos os resultados forem desconhecidos, então a saída é falsa. 
+
+        Perceba que assim como no caso do \textit{paradoxo do aniversário}, a chance de o resultado estar incorreto é bem pequena, uma vez que a cada iteração é feito um teste (e de fato, não é necessária uma quantidade absurda de testes para se obter uma chance quase nula de erro).
+
+\end{enumerate}
+\newpage
+\section*{Exercícios}
+
+\end{document}

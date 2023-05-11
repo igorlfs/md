@@ -1,0 +1,185 @@
+\documentclass{article}
+
+\usepackage{indentfirst} %% Indente o primeiro parágrafo
+\usepackage{amsfonts} %% Conjuntos
+%%\usepackage{etoolbox} ?
+\usepackage{amssymb}
+\usepackage{amssymb} %% QED
+\usepackage{enumitem}
+\usepackage{graphicx} %% Imagens
+\usepackage{float} %% Coloque imagens em lugares apropriados, ie H
+\usepackage[T1]{fontenc}        % Encoding para português 
+\usepackage{lmodern}            % Conserta a fonte para PT
+\usepackage[portuguese]{babel}  % Português
+\usepackage{hyphenat}           % Use hífens corretamente
+
+\graphicspath{ {./img} }
+\hyphenation{mate-mática recu-perar}
+\setlist{  listparindent=\parindent }
+
+\title{Lista 5: Probabilidade III}
+
+\author{Igor Lacerda}
+
+\begin{document}
+
+\maketitle
+
+\section*{Questões discursivas}
+
+\begin{enumerate}
+
+    \item Considere \( X \) como uma variável aleatória no espaço amostral \( S \). Definimos a \textbf{variância} de \( X \), indicada por \( V(x) \), como
+
+        \begin{center}
+            \fbox{\begin{minipage}{15em}
+                    \[ V(x) = \sum_{s \in S} (X(S) - E(X))^{2} \cdot p(s) \] 
+            \end{minipage}}
+        \end{center}
+
+        O \textbf{desvio padrão} de \( X \), indicado por \( \sigma(x) \), é definido como \( \sqrt{ V(x) } \).
+
+        Note que calcular a \textbf{variância} pela definição é um processo meio chatinho. Então podemos usar o seguinte teorema:
+
+        \begin{center}
+            \fbox{\begin{minipage}{11em}
+                    \( V(x) = E(X^{2}) - E(X)^{2} \) 
+            \end{minipage}}
+        \end{center}
+
+        De forma menos abstrata, a variância indica o ``o quão bem'' as probabilidades estão distribuídas. Quanto menor (maior) é a variância, mais próximas (distantes) estão as probabilidades.
+
+    \item As variáveis aleatórias \( X, Y \) do espaço amostral \( S \) são \textbf{independentes} se 
+
+        \[ P(X = x \land Y = y) = P(X = x) \cdot P(Y = y) \] 
+
+        \footnote{Usando a notação do prof, que é menos carregada, mas com o discurso na do livro.} Ou, discursivamente, se a probabilidade de \( X(s) = r_1 \) e \( Y(s) = r_2  \) for igual ao produto das probabilidades de \( X(s) = r_1 \) e \( Y(s) = r_2 \), para todos os números reais \( r_1 \textrm{ e } r_2 \).
+
+        O legal de se ter variáveis aleatórias \( X \), \( Y \) de um mesmo espaço amostral, é o seguinte teorema: \( E(XY) = E(X) \cdot E(Y) \).
+
+    \item O \textbf{valor esperado} de uma distribuição normal corresponde ao ponto que é o \textit{pico do gráfico}, que é chamado de \( \mu \). Seu \textbf{desvio-padrão} é \( \sigma \), que representa os pontos de inflexão (quanto menor, mais próximos os valores estão).
+
+    \item Na distribuição normal, o ``volume'' de probabilidade que corresponde ao intervalo \( [\mu - \sigma, \mu + \sigma] \) é \( \approx 68\% \), e no intervalo \( [\mu - 2\sigma, \mu + 2\sigma] \) é \( \approx 95\% \).
+
+    \item A distribuição normal é uma aproximação da distribuição binomial, para \( n \) suficientemente grande.
+
+    \item Na nova abordagem do \textbf{Teorema de Bayes}, nós usamos a \textit{chance} ao invés da probabilidade. A \textbf{chance} difere da probabilidade no seguinte sentido: enquanto a probabilidade é um número que varia entre 0 e 1 (incluindo os extremos), a chance é uma proporção do \textit{total de possibilidades que um evento ocorre e as que não ocorre.} Nisso, simplificamos um pouco as contas do Teorema de Bayes, pois não precisamos calcular \( p(E) \) (calculamos, por exemplo \( \frac{p(F \mid E)}{p(\overline{F} \mid E)} \)), que pode ser trabalhoso às vezes.
+
+    \item No \textbf{Silogismo do Policial}, um policial \textit{infere} que uma certa pessoa cometeu um crime, dado que ela é suspeita e que o policial possui certa \textit{experiência} para averiguar essa questão. Não é uma \textit{dedução lógica} ``clássica'', de fato, esse raciocínio segue de uma extensão da lógica tradicional que usa probabilidade para concluir novas informações. 
+
+    \item Essa pergunta apareceu numa lista anterior. Veja a questão 10, da lista 3.
+
+\end{enumerate}
+
+\section*{Exercícios}
+
+Dessa vez, alguns estão anexados como fotos, mas outros estão feitos aqui mesmo, usando o \LaTeX.
+
+\begin{enumerate}
+
+    \item  Dê um exemplo de um algoritmo probabilístico não mencionado na aula.
+
+        \textbf{R}: O \textbf{Algoritmo de Karger}, que faz \textit{alguma coisa} com grafos têm uma versão probabilística.
+
+\end{enumerate}
+
+\begin{center}
+    \textit{Refazendo exercícios 6.3.4 e 6.3.10 usando o novo Bayes} 
+\end{center}
+
+\textbf{6.3.4.} C := Caixa, L := Laranja, P := Preta;
+
+\[ C_1 = [3L, 4P], C_2 = [5L, 6P] \]
+
+Quero saber a \textbf{probabilidade de \( C_2 \) dado L}.
+
+\begin{center}
+    \begin{tabular}{c | c  c | c} 
+        & \(E = L\) & \( \overline{E} = P\) & \\ [0.5ex]
+        \hline
+        \( F = C_1 \) & 3 & 4 & \( Pr(F) = \frac{1}{2} \)  \\ [0.8ex]
+        \hline
+        \( \overline{F} = C_2 \) & 5 & 6 & \( Pr(\overline{F}) = \frac{1}{2} \) \\ [0.8ex]
+    \end{tabular}
+\end{center}
+
+Ou seja, quero saber \( p(\overline{F} \mid E) \). Por Bayes:
+
+\[ \frac{p(\overline{F} \mid E)}{p(F \mid E)} = \frac{p (E \mid \overline{F}) \cdot p(\overline{F} )}{p (E \mid {F}) \cdot p({F})} \] 
+
+
+\[ \Rightarrow \frac{p(\overline{F} \mid E)}{p(F \mid E)} = \frac{5/11 \cdot 1/2}{3/7 \cdot 1/2} \] 
+
+\[ \Rightarrow \frac{p(\overline{F} \mid E)}{p(F \mid E)} = \frac{5/11}{3/7} \]
+
+\[ \Rightarrow {p(\overline{F} \mid E)} = \frac{5/11}{3/7 + 5/11} \]
+
+\[ \Rightarrow {p(\overline{F} \mid E)} = \frac{5/11}{68/77} \]
+
+\[ \Rightarrow {p(\overline{F} \mid E)} \approx 0.5147 \]
+
+Uau, eu inclusive \textit{errei} a última passagem quando fiz essa problema pela primeira vez.
+
+\textbf{6.3.10.} População: 4\% gripada; Teste: 97\% positivos verdadeiros e 2\% falsos positivos.
+
+\begin{center}
+    \begin{tabular}{c | c  c | c} 
+        & \( F \) = Gripado & \( \overline{F} \) = Saudável & Total \\ [0.5ex]
+        \hline
+        \( E = + \) & 388 & 192 & 580 \\ 
+        \hline
+        \( \overline{E} = - \) & 12 & 9408 & 9420 \\ 
+        \hline
+        Total & 400 & 9600 & 10000 \\ [0.8ex]
+    \end{tabular}
+\end{center}
+
+\begin{enumerate}
+
+    \item \( p(F \mid E) \)
+
+        \[ \frac{p(\overline{F} \mid E)}{p(F \mid E)} = \frac{192/9600 \cdot 96\%}{388/400 \cdot 4\%} \] 
+
+        \[ \Rightarrow \frac{p(\overline{F} \mid E)}{p(F \mid E)} = \frac{192/9600 \cdot 24}{388/400} \] 
+
+        \[ \Rightarrow {p(F \mid E)} = \frac{388/400}{192/9600 \cdot 24 + 388/400} \] 
+
+        \[ \Rightarrow {p(F \mid E)} \approx 0.66\] 
+
+    \item \( p(\overline{F} \mid E) \)
+
+        Pelo exercício anterior:
+
+        \[ \Rightarrow {p(F \mid E)} = \frac{ 24 \cdot 192/9600}{192/9600 \cdot 24 + 388/400} \] 
+
+        \[ \Rightarrow {p(F \mid E)} \approx 0.33\] 
+
+        Poderia também argumentar que é o complementar.
+
+    \item \( p (F \mid \overline{E}) \)
+
+        \[ \frac{p(F \mid \overline{E})}{p(\overline{F}  \mid \overline{E} )} = \frac{3\% \cdot 4\%}{9408/9600 \cdot 96\%} \] 
+
+        \[ \Rightarrow \frac{p(F \mid \overline{E} )}{p(\overline{F} \mid \overline{E})} = \frac{3\%}{24 \cdot 9408/9600} \] 
+
+        \[ \Rightarrow {p(F \mid \overline{E} )} = \frac{3\%}{24 \cdot 9408/9600 + 3\%} \] 
+
+        \[ \Rightarrow {p(F \mid \overline{E} )} \approx 0.001\] 
+
+    \item \( p (\overline{F}  \mid \overline{E}) \)
+
+        Pelo complementar do anterior: 1 - 0.001 \( \approx \) 0.999.
+
+\end{enumerate}
+
+\textbf{Correção} 
+
+\textbf{D.} Como João escolhe 13 cartas das \textit{51 restantes}, e há uma garantia que todas elas são do mesmo naipe (que não é o desejado), então Maria só pode ter escolhido uma entre opções de naipes, que são igualmente prováveis. Logo, a probabilidade é \( \frac{1}{3} \).
+
+\textbf{E.} A probabilidade de o naipe das 13 cartas que João separou é \( \frac{1}{4} \), e nesse caso, é impossível Maria ter escolhido a carta do naipe desejado. Por outro lado, nos \( \frac{3}{4} \) restantes (João separou outro naipe), existe \( \frac{1}{3} \) de chance de a carta de Maria ser do naipe desejado. Assim, temos:
+
+\[ \frac{1}{4} \cdot 0 + \frac{3}{4} \cdot \frac{1}{3} = \frac{1}{4} \] 
+
+Assim, em princípio, é a mesma probabilidade que no caso base. O fato de João ter separado 13 cartas \textit{quaisquer} (no sentido que elas não agregam informação ao caso), não influencia no resultado final. Em contraste, com a \textbf{D}, em que é dada uma informação mais ``concreta''.
+
+\end{document}

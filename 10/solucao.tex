@@ -1,0 +1,146 @@
+\documentclass{article}
+
+%%\usepackage{indentfirst} %% Indente o primeiro parágrafo
+\usepackage{amsfonts} %% Conjuntos
+%%\usepackage{etoolbox} ?
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb} %% QED
+\usepackage{enumitem}
+\usepackage{graphicx} %% Imagens
+\usepackage{float} %% Coloque imagens em lugares apropriados, ie H
+\usepackage[T1]{fontenc}        % Encoding para português 
+\usepackage{lmodern}            % Conserta a fonte para PT
+\usepackage[portuguese]{babel}  % Português
+\usepackage{hyphenat}           % Use hífens corretamente
+
+\usepackage[margin=1.5in]{geometry}
+
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)} %% Facilita o módulo
+
+\makeatletter
+\let\saveqed\qed
+\renewcommand\qed{%
+   \ifmmode\displaymath@qed
+   \else\saveqed
+   \fi}
+
+
+\graphicspath{ {./img} }
+\hyphenation{mate-mática recu-perar}
+\setlist[enumerate]{wide=\parindent}
+
+\title{Lista 10: Grafos I}
+
+\author{Igor Lacerda}
+
+\begin{document}
+
+\maketitle
+
+\section*{Questões Discursivas}
+
+\begin{enumerate}
+	\item Seja \( G = (V, E) \) um grafo não orientado com \( e \) arestas. Então
+	      \[ 2e = \sum_{v \in V} \deg(v) \]
+	      Essa relação é válida pois cada aresta é contada duas vezes quando se soma os graus dos vértices (uma vez para saída e uma vez para entrada).
+
+	\item Pelo resultado anterior. Para garantir a condição enunciada, é preciso que a soma dos graus dos vértices cujo grau é ímpar seja par.
+
+	\item Seja \( G = (V, E) \) um grafo com arestas orientadas. Então
+	      \[ \sum_{v \in V} \deg^{-}(v) = \sum_{v \in V} \deg^{+}(v) = |E| \]
+	      Essa relação é válida pois todo grau de saída de um vértice é aresta de outro (ou ele mesmo) e vice-versa.
+
+	\item Grafos.
+
+	      \begin{enumerate}
+
+		      \item \( K_n \): O grafo que liga todo vértice (cada um dos \( n \)) a todos os outros vértices.
+
+		      \item \( K_{m,n} \): O grafo que liga todos os \( m \) vértices aos \( n \) vértices.
+
+		      \item \( C_n \): O grafo que liga os \( n \) vértices 2 a 2 formando um ciclo.
+
+		      \item \( W_n \): extensão do grafo anterior adicionando um vértice que é ligado a todos os outros.
+
+		      \item \( Q_n \): o grafo que conecta as \textit{strings} de tamanho \( n \) permitindo apenas alterações de 1 bit.
+
+	      \end{enumerate}
+
+	\item Grafos.
+
+	      \begin{enumerate}
+
+		      \item \( K_n \): vértices: \( n \), arestas: \( n(n-1)/2 \)
+
+		      \item \( K_{m,n} \): vértices: \( n + m \), arestas: \( nm \)
+
+		      \item \( C_n \): vértices: \( n \), arestas: \( n \)
+
+		      \item \( W_n \): vértices: \( n + 1 \), arestas: \( 2n \)
+
+		      \item \( Q_n \): vértices: \( n \), arestas: \( 2^n \)
+
+	      \end{enumerate}
+
+	\item Grafos.
+	      \begin{enumerate}
+
+		      \item Um grafo bipartido é um grafo cujos vértices podem ser divididos em dois conjuntos disjuntos U e V tais que toda aresta conecta um vértice em U a um vértice em V.
+
+		      \item Apenas \( C_n \) é bipartido.
+
+		      \item Tentar colorir as arestas usando apenas duas cores.
+
+	      \end{enumerate}
+
+	\item Grafos.
+	      \begin{enumerate}
+
+		      \item Matrizes de adjacência, matrizes de incidência e listas de adjacência.
+
+		      \item \textit{Não é nada prático fazer isso no \LaTeX.}
+
+	      \end{enumerate}
+
+	\item Grafos.
+	      \begin{enumerate}
+
+		      \item Isso significa que é possível fazer uma bijeção de um grafo para o outro de tal maneira que a função preserva vértices adjacentes.
+
+		      \item Invariantes são propriedades que permanecem após a aplicação do isomorfismo. Exemplos de invariantes são: número de vértices, número de arestas, grau dos vértices, existência de ciclos (de mesmo tamanho) e o número de pontes (num grafo conexo).
+
+		      \item \textit{Os grafos do exemplo 10 da seção 2 do capítulo}
+
+		      \item Não existe não.
+
+	      \end{enumerate}
+
+	\item Grafos.
+	      \begin{enumerate}
+
+		      \item \textit{In an undirected graph G, two vertices u and v are called connected if G contains a path from u to v. Otherwise, they are called disconnected. If the two vertices are additionally connected by a path of length 1, i.e. by a single edge, the vertices are called adjacent. A graph is said to be connected if every pair of vertices in the graph is connected.} (da Wikipédia, em inglês). Basicamente, existe um caminho entre quaisquer dois vértices do grafo.
+
+		      \item As componentes conexas de um grafo são os maiores subgrafos de um dado grafo \( G \) tais que sua união é o grafo \( G \), sua interseção é disjunta e cada subgrafo é conexo.
+
+	      \end{enumerate}
+
+	\item Grafos.
+
+	      \begin{enumerate}
+
+		      \item Um \textbf{ciclo Euleriano} é um ciclo que passando por todas as arestas de um grafo uma única vez, retorna ao vértice de partida. Um \textbf{caminho Euleriano} é um caminho que passa por todas as arestas de um grafo uma única vez.
+
+		      \item O problema das sete pontes de Königsberg consiste em atravessar 7 pontes passando uma única vez em cada e voltando para onde se partiu. Enunciá-lo em termos de um ciclo Euleriano: desenhe um grafo correspondente. Este grafo é tal que não atende a condição para que se tenha um ciclo Euleriano.
+
+		      \item Um grafo não orientado tem um caminho Euleriano \textbf{sse} ele possui exatamente 2 vértices de grau ímpar.
+
+		      \item Um grafo não orientado possui um ciclo Euleriano \textbf{sse} todos os seus vértices têm grau par.
+
+	      \end{enumerate}
+
+\end{enumerate}
+
+\section*{Exercícios}
+
+\end{document}

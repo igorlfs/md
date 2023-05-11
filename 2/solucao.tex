@@ -1,0 +1,99 @@
+\documentclass{article}
+\usepackage{indentfirst} %% Indente o primeiro parágrafo
+\usepackage{amsfonts} %% Conjuntos
+%%\usepackage{etoolbox} ?
+\usepackage{amssymb}
+\usepackage{amssymb} %% QED
+\usepackage{enumitem}
+\usepackage{graphicx} %% Imagens
+\usepackage{float} %% Coloque imagens em lugares apropriados, ie H
+\graphicspath{ {./img} }
+\let\biconditional\leftrightarrow
+\setlength{\emergencystretch}{30pt}
+\setlist{  listparindent=\parindent }
+\AtBeginEnvironment{quote}{\par\singlespacing\small} %% Faz citações terem formatação diferente
+\title{Matemática Discreta: Lista 2}
+\author{Igor Lacerda}
+\begin{document}
+\maketitle
+\section*{Questões discursivas}
+\begin{enumerate}
+    \item O binômio de Newton é uma forma é uma forma sistemática de se escrever as expansões simplificadas (ou seja, termos semelhantes agrupados) de expressões do tipo \( (a + b)^{n} \), onde \( n \) é um inteiro não negativo. Para isso, é feito uso de \textit{coeficientes binomiais}, discutidos no item seguinte.
+
+    \item O coeficiente binomial é o número ``base'' que acompanha cada termo das expansões simplificadas de expressões do tipo \( (a+b)^{n} \). Para deixar essa questão de número base mais clara, considere o exemplo \( (2 + 2)^{2} \), que expandindo é \( 2^{2} + 2 \cdot 2 \cdot 2 + 2^{2} \) e simplificando é \( 4 + 8 + 4 \), mas perceba que isso não contradiz o fato de a expansão de \( (a+b)^2 \) ter como coeficientes em ordem tradicional a tripla \( (1,2,1) \). Em termos simples, números no lugar de variáveis não alteram o \textit{coeficiente}.
+
+        O coeficiente binomial é justamente calculado a partir de \( n \choose k \), onde \( n \) é a potência em questão e \( k \) corresponde à ordenação ``natural'' dada a essas expansões.
+
+    \item O triângulo de Pascal é uma construção abstrata em que cada linha corresponde aos coeficientes binomiais \( n \choose k \) em ordem. Em particular, a primeira linha contém apenas o coeficiente \( 0 \choose 0 \), a segunda linha \( 1 \choose 0 \) e \( 1 \choose 1 \), e assim por diante. Pela identidade de Pascal, os termos que não estão nos extremos podem ser construídos pela soma dos números imediatamente nas diagonais superiores. Por exemplo, \( 2 \choose 1 \) é a soma de \( 1 \choose 0 \) e \( 1 \choose 1 \). 
+
+    \item Bem, tem várias propriedades interessantes, inclusive a que comentei na questão anterior. Além dela e das comentadas em aula (encontrar Fibonacci nas diagonais, a soma das linhas é igual a \( 2^{n} \) onde n corresponde ao termo de \( (a + b)^n \) em questão), adiciono o fato de que em base 10, cada algarismo corresponde aos dígitos das potências de base 11. Por exemplo: \( 11^{2} \) é 121, que corresponde justamente com os coeficientes de \( (a + b)^2 \). Para números de mais de um algarismo é preciso fazer algumas correções no entanto, mas ainda funciona. 
+
+    \item Uma ``prova combinatória'' é um tipo de demonstração que usa do seguinte argumento: dada uma equação que envolve alguma técnica de contagem, se a contagem de ambos os lados da equação for igual, estes são equivalentes. Uma ``prova algébrica'' é uma demonstração mais na raça mesmo, usando de manipulações algébricas para partir de um lado da equação que se deseja mostrar para se chegar no outro. Parece simples mas é comum envolver operações não triviais, como certos tipos de ``multiplicação por 1''. Acho que na prática ninguém usa esses termos.
+
+    \item 
+        \begin{sloppy}
+            \begin{center}
+                \begin{tabular}{|c c | c|} 
+                    \hline
+                    \( \textrm{Nome} \)  & \( \textrm{Exemplo} \) & \(\ \textrm{Fórmula} \) \\ [0.5ex]
+                    \hline\hline
+                    Perm sem repetição & Permutando ABCDEFGH & n!  \\ 
+                    \hline
+                    Comb sem repetição & Subconjuntos de tamanho r & \( \frac{n}{r!(n-r)!} \)   \\
+                    \hline
+                    Perm com repetição & Permutando AAABBC & \( n^{r} \)   \\
+                    \hline
+                    Comb com repetição & \( x_1 + x_2 + x_3 = n \)  & \( C(r+n-1,r) \)   \\ 
+                    \hline
+                    Perm com idênticos & Anagramas  & \( \frac{n!}{n_1! \cdot n_2! \cdot \mathellipsis \cdot n_k!} \)   \\ 
+                    \hline
+                    Obj dist Caixa dist & Mãos de poker  & \( \frac{n!}{n_1! \cdot n_2! \cdot \mathellipsis \cdot n_k! }\)    \\ 
+                    \hline
+                    Obj idên Caixa dist & Bolas em Caixas Coloridas  & \( C(r+n-1,r) \)     \\ 
+                    \hline
+                    Obj dist Caixa idên & Funcionários em Escritórios  & Não tem    \\ 
+                    \hline
+                    Obj idên Caixa idên & Livros em Caixas  & Não tem    \\ [1ex]
+                    \hline
+                \end{tabular}
+            \end{center}
+        \end{sloppy}
+
+    \item \( | A_1 \cup A_2 \cup A_3 \cup A_4 | = ( |A_1| + |A_2| + |A_3| + |A_4|) - (|A_1 \cap A_2| + |A_1 \cap A_3| + |A_1 \cap A_4| + |A_2 \cap A_3| + |A_2 \cap A_4| + |A_3 \cap A_4| ) + ( |A_1 \cap A_2 \cap A_3| + |A_1 \cap A_2 \cap A_4| + |A_1 \cap A_3 \cap A_4| + |A_2 \cap A_3 \cap A_4|) - (|A_1 \cap A_2 \cap A_3 \cap A_4|) \) 
+
+    \item Usando a notação bonitinha do slide do professor:
+
+        \[ | A_1 \cap A_2 \cap \mathellipsis \cap A_n| = S_1 - S_2 + S_3 - ... + (-1)^{n+1}S_n\] 
+
+    \item \(N(P'_1 P'_2 \mathellipsis P'_3) := |\{x \in A \mid x \textrm{ não tem nenhuma das propriedades } P_i\}|  \) e \( N \) a cardinalidade do universo:
+
+\[ N(P'_1 P'_2 \mathellipsis P'_3)  = N - |A_1 \cap A_2 \cap \mathellipsis \cap A_n| \] 
+
+    \textit{É essa mesma? Ficou confusa a questão}
+
+    \item Pela fórmula anterior:
+
+        \[ N(P'_1 P'_2 \mathellipsis P'_3) = N - S_1 + S_2 - S_3 + ... + (-1)^{n}S_n\] 
+
+    \item Para \( m \geq n \) há:
+        \[ n^{m} - C(n,1)(n-1)^{m} + C(n,2)(n-2)^{m} - \mathellipsis + (-1)^{n-1}C(n,n-1) \cdot 1^{m}\] 
+
+        funções sobrejetivas de um conjunto de \( m \) elementos para um conjunto com \( n \) elementos.
+
+    \item O ponto fixo de uma permutação é uma posição que não foi alterada após a permutação. Se \( P \) for uma ``função de permutação'', podemos dizer que um ponto \( a \) é fixo se \( P(a)=a \).
+
+    \item As permutações que não possuem pontos fixo são chamadas de \textit{desarranjos} ou \textit{permutações caóticas} e são aquelas que \textbf{não preservam pontos fixos}. Podemos calcular \( D_n \), o número de permutações caóticas para um arranjo usando com \( n \) elementos:
+
+        \[ D_n = \left\lfloor\frac{n!}{e}\right\rfloor  \]
+
+        Desse modo, para calcular as permutações que preservam pontos fixos podemos fazer:
+        \[ \frac{n! - D_n}{n!} \] 
+
+        Detalhe: para \( n \) grande, essa probabilidade aproxima:
+        \[ 1 - \frac{1}{e} \approx 63.2\% \]
+
+\end{enumerate}
+\newpage
+\section*{Exercícios}
+
+\end{document}
